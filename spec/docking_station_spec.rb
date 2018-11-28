@@ -7,7 +7,7 @@ describe DockingStation do
 
   it 'It returns a working bike' do
     bike = Bike.new
-    expect(bike.working?.eql?(true))
+    expect{bike.working?.eql?(true)}
   end
 
   it "It should respond to dock" do
@@ -15,8 +15,13 @@ describe DockingStation do
     expect{docking_station.to respond_to(:dock)}
   end
 
-    it 'docks something' do
+  it 'docks something' do
       bike = Bike.new
       expect(subject.dock(bike)).to eq bike
-    end
+  end
+
+  it 'should cause an error if the Docking Station is empty' do
+    docking_station = DockingStation.new
+    expect{docking_station.release_bike}.to raise_error
+  end
 end
