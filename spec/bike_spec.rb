@@ -1,6 +1,4 @@
-require 'bike'
-describe Bike do
-end
+require 'docking_station'
 
 describe Bike do
   describe 'It responds to working?' do  # Origianl one line method deemed uninformative of test
