@@ -16,21 +16,23 @@ describe DockingStation do
       bike = Bike.new
       expect{bike.working?.eql?(true)}
     end
+
   end
 
   describe "#dock" do
+    let(:bikes) {docking_station = DockingStation.new}
 
     it 'should cause an error if the Docking Station is full' do
       bike = Bike.new
-      bike_2 = Bike.new
       docking_station = DockingStation.new
-      docking_station.dock(bike)
-      expect{docking_station.dock(bike_2)}.to raise_error 'Docking Station Full'
+      bikes << 20.times.push(Bike.new)
+      expect{docking_station.dock(bike)}.to raise_error 'Docking Station Full'
     end
 
     it 'docks something' do
       bike = Bike.new
-      expect(subject.dock(bike)).to eq bike
+      expect(subject.dock(bike)).to eq @bikes
     end
+
   end
 end
