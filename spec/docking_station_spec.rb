@@ -1,6 +1,8 @@
 require 'docking_station'
+
 describe DockingStation do
   let (:station) {DockingStation.new}
+  let (:bike) {Bike.new}
 
   context "#initialize with parameter" do
     let (:docking_station) {DockingStation.new(10)}
@@ -30,13 +32,20 @@ describe DockingStation do
       expect(station).to respond_to(:release_bike)
     end
 
+    it "doesn't release broken bikes if reported broken" do
+      bike.report
+      expect{station.release_bike(bike)}.to raise_error
+    end
+
+    end
+
   end
 
   context "#dock" do
 
     it 'should cause an error if the Docking Station is full' do
-      DockingStation::DEFAULT_CAPACITY.times { station.dock(Bike.new) }
-      expect{ station.dock(Bike.new) }.to raise_error 'Docking Station Full'
+      DockingStation::DEFAULT_CAPACITY.times { station.dock(bike) }
+      expect{ station.dock(bike) }.to raise_error 'Docking Station Full'
     end
 
   end
